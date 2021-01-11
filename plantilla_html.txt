@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask</title>
+</head>
+
+<body>
+
+
+    <div class="container mt-5">
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %} {% endif %} {% endwith %}
+        <div class="head">
+            <h1>Contactos Flask</h1>
+        </div>
+        <div>
+            <h2>Formulario</h2>
+            <form action="/add_contact" method="POST">
+                <div class="row">
+                    <div class="col">
+                        <label for="">Nombre</label>
+                        <input class="form-control form-control" type="text" name="fullname" placeholder="Full name">
+                    </div>
+                    <div class="col">
+                        <label for="">Telefono</label>
+                        <input class="form-control form-control" type="text" name="phone" placeholder="Phone">
+                    </div>
+                    <div class="col">
+                        <label for="">Email</label>
+                        <input class="form-control form-control" type="text" name="email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+{% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %} {% endif %} {% endwith %}
+
+<form action="/add_contact" method="POST">
+
+    <label for="">Nombre</label>
+    <input class="form-control form-control" type="text" name="fullname" placeholder="Full name">
+
+    <label for="">Telefono</label>
+    <input class="form-control form-control" type="text" name="phone" placeholder="Phone">
+
+    <label for="">Email</label>
+    <input class="form-control form-control" type="text" name="email" placeholder="Email">
+
+    <button type="submit" class="btn btn-success">Save</button>
+
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <td>Fullname</td>
+            <td>Phone</td>
+            <td>Email</td>
+            <td>Operations</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contact in contacts %}
+        <tr>
+            <td>{{ contact.1 }}</td>
+            <td>{{ contact.2 }}</td>
+            <td>{{ contact.3 }}</td>
+            <td>
+                <a href="/edit/{{ contact.0 }}">Edit</a>
+                <a href="/delete/{{ contact.0 }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
