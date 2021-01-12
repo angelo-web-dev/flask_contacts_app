@@ -24,8 +24,10 @@
 
                     <label for="">Email</label>
                     <input class="form-control form-control" type="text" name="email" placeholder="Email">
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
 
-                    <button type="submit" class="btn btn-success">Save</button>
 
                 </form>
             </div>
@@ -46,7 +48,7 @@
                             <td>{{ contact.2 }}</td>
                             <td>{{ contact.3 }}</td>
                             <td>
-                                <a href="/edit/{{ contact.0 }}">Edit</a>
+                                <a href="/edit/{{ contact.0 }}">Edit</a> |
                                 <a href="/delete/{{ contact.0 }}">Delete</a>
                             </td>
                         </tr>

@@ -27,16 +27,18 @@ def add_contact():
         phone = request.form['phone']
         email = request.form['email']
         cur = mysql.connection.cursor()
-        cur.execute('INSERT INTO contacts (fullname, phone, email) VALUES (%s, %s, %s)', 
-        (fullname, phone, email))
+        cur.execute('INSERT INTO contacts (fullname, phone, email) VALUES (%s, %s, %s)', (fullname, phone, email))
         mysql.connection.commit()
         flash('Contacto agregado satisfactoriamente')
         print('Peticion recibida')
         return redirect(url_for('Index'))
 
-@app.route('/edit')
-def edit_contact():
-    return 'edit contact'
+@app.route('/edit/<string:id>')
+def get_contact(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM contacts WHERE id = {0}'.format(id))
+    data = cur.fetchall()
+    return render_template('edit-contact.html', contact = data[0])
 
 @app.route('/delete/<string:id>')
 def delete_contact(id):
